@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.utouu.cc.commondemo.activity.MainActivity">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <Button
+        android:id="@+id/btn_scanning_mainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTest"
+        android:elevation="5dp"
+        android:text="二维码扫描"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+
+    <Button
+        android:id="@+id/btn_imageCrop_mainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorTest"
+        android:elevation="5dp"
+        android:text="图片裁剪"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_weakHint_mainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorTest"
+        android:elevation="5dp"
+        android:text="弱提示框"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_scanImage_mainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorTest"
+        android:elevation="5dp"
+        android:text="查看大图"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+    <ImageButton
+        android:id="@+id/iv_scanImg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_custom_uiscan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.utouu.cc.commondemo.activity.CustomUIScanActivity">
+
+    <cn.utsoft.commons.qrscanner.UTScannerView
+        android:id="@+id/sv_custom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ut_cornerColor="#3bff1d"
+        app:ut_cornerSize="6dp"
+
+        app:ut_isOnlyDecodeScanBoxArea="true"
+        app:ut_isShowDefaultScanLineDrawable="true"
+        app:ut_isShowTipTextAsSingleLine="true"
+        app:ut_isTipTextBelowRect="true"
+        app:ut_maskColor="#a0000000"
+        app:ut_qrCodeTipText="将二维码/条码放入框内，即可自动扫描"
+        app:ut_tipTextMargin="32dp"
+        app:ut_tipTextSize="12dp"
+        app:ut_toolbarHeight="48dp"
+        app:ut_topOffset="90dp" />
+    <!--app:ut_customScanLineDrawable="@drawable/custom_scan_line"-->
+    <ImageView
+        android:id="@+id/iv_flashlight"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:onClick="onClick"
+        android:src="@drawable/ic_flash_open" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:onClick="onClick"
+            android:paddingBottom="10dp"
+            android:paddingLeft="18dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="二维码/条码扫描"
+            android:textColor="@android:color/white"
+            android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/iv_gallery"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:onClick="onClick"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:src="@drawable/ic_gallery" />
+
+    </FrameLayout>
+</RelativeLayout>
