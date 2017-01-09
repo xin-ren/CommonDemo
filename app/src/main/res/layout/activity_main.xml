@@ -54,5 +54,14 @@
     <ImageButton
         android:id="@+id/iv_scanImg"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_successInfo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textSize="23sp"
+        android:gravity="center"
+        android:textColor="#000"/>
 </LinearLayout>

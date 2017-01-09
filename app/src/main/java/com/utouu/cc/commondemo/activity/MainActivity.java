@@ -1,7 +1,5 @@
 package com.utouu.cc.commondemo.activity;
 
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,13 +7,19 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.utouu.cc.commondemo.R;
 import com.utouu.cc.commondemo.base.BaseActivity;
 import com.utouu.cc.commondemo.util.ToastUtil;
+
+import java.io.File;
+import java.net.URI;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,10 +31,6 @@ import cn.utsoft.commons.qrscanner.QRCodeOption;
 import cn.utsoft.commons.qrscanner.ScanResultListener;
 import cn.utsoft.commons.qrscanner.UTScannerManager;
 import cn.utsoft.commons.toast.UTToast;
-import cn.utsoft.commons.toast.UTToastUtil;
-
-import static android.R.attr.duration;
-import static android.R.attr.visibility;
 
 /**
  * Created by 任新 on 2017/1/6 10:53.
@@ -43,15 +43,18 @@ public class MainActivity extends BaseActivity {
     Toolbar mToolbar;
     @BindView(R.id.iv_scanImg)
     ImageButton iv_scanImg;
+    @BindView(R.id.tv_successInfo)
+    TextView tv_successInfo;
 
     private UTCropManager mCropManager;
-    private boolean mIsOval = true;
+    private MainActivity mMainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mToolbar.setTitle("成都公共模块测试");
         setSupportActionBar(mToolbar);
+        mMainActivity = this;
     }
 
     /**
@@ -83,7 +86,8 @@ public class MainActivity extends BaseActivity {
                 break;
             //图片裁剪
             case R.id.btn_imageCrop_mainActivity:
-                iv_scanImg.setVisibility(View.GONE);
+                iv_scanImg.setVisibility(View.VISIBLE);
+                tv_successInfo.setVisibility(View.GONE);
                 //调用默认的图片裁剪
                 defaulCropImage();
                 //调用自定义的图片裁剪
@@ -92,6 +96,7 @@ public class MainActivity extends BaseActivity {
             //弱提示框
             case R.id.btn_weakHint_mainActivity:
                 iv_scanImg.setVisibility(View.GONE);
+                tv_successInfo.setVisibility(View.GONE);
                 //UTSOFT快速使用
                 //UTToastUtil.success("测试成功");
                 //默认弱提示框显示
@@ -112,8 +117,11 @@ public class MainActivity extends BaseActivity {
             //查看大图
             case R.id.btn_scanImage_mainActivity:
                 iv_scanImg.setVisibility(View.GONE);
+                tv_successInfo.setVisibility(View.GONE);
                 UTImgBrowserHelper helper = new UTImgBrowserHelper(this);
-                helper.addImageView(iv_scanImg,"https://www.baidu.com/img/bd_logo1.png");
+                helper.addImageView(iv_scanImg, "https://www.baidu.com/img/bd_logo1.png");
+                helper.addImageView(iv_scanImg, "https://img11.360buyimg.com/cms/jfs/t4093/169/1264376356/294535/8904a656/58708205Nba186efe.jpg");
+                helper.addImageView(iv_scanImg, "http://img03.sogoucdn.com/app/a/100520093/ac75323d6b6de243-e8600a70e32f2820-30324ce80ad8394e03245be5ce8e4b42.jpg");
                 helper.startPreActivity(0);
                 break;
         }
@@ -147,6 +155,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(String result) {
                 ToastUtil.showShortToast(MainActivity.this, result);
+                tv_successInfo.setText(result);
             }
 
             @Override
@@ -191,9 +200,8 @@ public class MainActivity extends BaseActivity {
         mCropManager.crop(this, null, UTCropManager.SourceType.GALLERY, false, new CropResultListener() {
             @Override
             public void onSuccess(Uri uri) {
-//                File file = new File(URI.create(uri.toString()));
-//                if (mIsOval) GlideManager.loadRoundImg(file, mIvAvater);
-//                else GlideManager.loadImg(file, mIvAvater);
+                File file = new File(URI.create(uri.toString()));
+                Glide.with(mMainActivity).load(file).skipMemoryCache(true).into(iv_scanImg);
             }
 
             @Override
@@ -204,7 +212,7 @@ public class MainActivity extends BaseActivity {
     }
 
     //自定义裁剪图片
-    private void customCropImage(){
+    private void customCropImage() {
         //通过UTCropManager对象调用crop()方法，传入自定义剪裁界面的CustomCropUIActivity
         mCropManager.crop(this, CustomImageCropActivity.class, UTCropManager.SourceType.ALL, false, new CropResultListener() {
             @Override
