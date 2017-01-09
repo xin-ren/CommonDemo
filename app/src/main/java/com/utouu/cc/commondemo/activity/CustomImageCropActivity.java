@@ -31,6 +31,7 @@ public class CustomImageCropActivity extends UTBaseCropActivity implements View.
 
         mTvCancle.setOnClickListener(this);
         mTvCut.setOnClickListener(this);
+
         mIvRotate.setOnClickListener(this);
     }
 
