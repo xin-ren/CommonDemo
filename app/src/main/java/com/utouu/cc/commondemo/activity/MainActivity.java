@@ -26,6 +26,7 @@ import butterknife.OnClick;
 import cn.utsoft.commons.cropper.CropResultListener;
 import cn.utsoft.commons.cropper.UTCropManager;
 import cn.utsoft.commons.imgbrowser.helper.UTImgBrowserHelper;
+import cn.utsoft.commons.imgbrowser.util.DimenUtil;
 import cn.utsoft.commons.qrscanner.MakeQRCodeListener;
 import cn.utsoft.commons.qrscanner.QRCodeOption;
 import cn.utsoft.commons.qrscanner.ScanResultListener;
@@ -175,7 +176,7 @@ public class MainActivity extends BaseActivity {
         //获取要添加到二维码中的图片对象
         Bitmap logoBitmap = BitmapFactory.decodeResource(MainActivity.this.getResources(), R.mipmap.ic_launcher);
         //创建生成二维码图片的配置对象
-        QRCodeOption option = new QRCodeOption("悠唐网络科技有限公司", 100, logoBitmap, UTScannerManager.LogoSize.LARGE);
+        QRCodeOption option = new QRCodeOption("悠唐网络科技有限公司", DimenUtil.dip2px(this,150), logoBitmap, UTScannerManager.LogoSize.LARGE);
         //传入配置对象，和回调监听
         UTScannerManager.getIns().makeQRCode(option, new MakeQRCodeListener() {
             //生成二维码图片的回调
