@@ -33,6 +33,9 @@ import cn.utsoft.commons.qrscanner.ScanResultListener;
 import cn.utsoft.commons.qrscanner.UTScannerManager;
 import cn.utsoft.commons.toast.UTToast;
 
+import static com.utouu.cc.commondemo.R.id.iv_scanImg;
+import static com.utouu.cc.commondemo.R.id.tv_successInfo;
+
 /**
  * Created by 任新 on 2017/1/6 10:53.
  * Function:成都公共模块测试主界面
@@ -42,10 +45,12 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.tb_title)
     Toolbar mToolbar;
-    @BindView(R.id.iv_scanImg)
-    ImageButton iv_scanImg;
-    @BindView(R.id.tv_successInfo)
-    TextView tv_successInfo;
+    //图片控件
+    @BindView(iv_scanImg)
+    ImageButton mIBScan;
+    //成功消息展示控件
+    @BindView(tv_successInfo)
+    TextView mTVSuccessInfo;
 
     private UTCropManager mCropManager;
     private MainActivity mMainActivity;
@@ -78,7 +83,7 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             //二维码扫描
             case R.id.btn_scanning_mainActivity:
-                iv_scanImg.setVisibility(View.VISIBLE);
+                mIBScan.setVisibility(View.VISIBLE);
                 //调用默认的二维码扫描
                 //defaultUIScan();
                 //调用自定义的二维码扫描
@@ -87,8 +92,8 @@ public class MainActivity extends BaseActivity {
                 break;
             //图片裁剪
             case R.id.btn_imageCrop_mainActivity:
-                iv_scanImg.setVisibility(View.VISIBLE);
-                tv_successInfo.setVisibility(View.GONE);
+                mIBScan.setVisibility(View.VISIBLE);
+                mTVSuccessInfo.setVisibility(View.GONE);
                 //调用默认的图片裁剪
                 defaulCropImage();
                 //调用自定义的图片裁剪
@@ -96,8 +101,8 @@ public class MainActivity extends BaseActivity {
                 break;
             //弱提示框
             case R.id.btn_weakHint_mainActivity:
-                iv_scanImg.setVisibility(View.GONE);
-                tv_successInfo.setVisibility(View.GONE);
+                mIBScan.setVisibility(View.GONE);
+                mTVSuccessInfo.setVisibility(View.GONE);
                 //UTSOFT快速使用
                 //UTToastUtil.success("测试成功");
                 //默认弱提示框显示
@@ -117,12 +122,12 @@ public class MainActivity extends BaseActivity {
                 break;
             //查看大图
             case R.id.btn_scanImage_mainActivity:
-                iv_scanImg.setVisibility(View.GONE);
-                tv_successInfo.setVisibility(View.GONE);
+                mIBScan.setVisibility(View.GONE);
+                mTVSuccessInfo.setVisibility(View.GONE);
                 UTImgBrowserHelper helper = new UTImgBrowserHelper(this);
-                helper.addImageView(iv_scanImg, "https://www.baidu.com/img/bd_logo1.png");
-                helper.addImageView(iv_scanImg, "https://img11.360buyimg.com/cms/jfs/t4093/169/1264376356/294535/8904a656/58708205Nba186efe.jpg");
-                helper.addImageView(iv_scanImg, "http://img03.sogoucdn.com/app/a/100520093/ac75323d6b6de243-e8600a70e32f2820-30324ce80ad8394e03245be5ce8e4b42.jpg");
+                helper.addImageView(mIBScan, "https://www.baidu.com/img/bd_logo1.png");
+                helper.addImageView(mIBScan, "https://img11.360buyimg.com/cms/jfs/t4093/169/1264376356/294535/8904a656/58708205Nba186efe.jpg");
+                helper.addImageView(mIBScan, "http://img03.sogoucdn.com/app/a/100520093/ac75323d6b6de243-e8600a70e32f2820-30324ce80ad8394e03245be5ce8e4b42.jpg");
                 helper.startPreActivity(0);
                 break;
         }
@@ -156,7 +161,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(String result) {
                 ToastUtil.showShortToast(MainActivity.this, result);
-                tv_successInfo.setText(result);
+                mTVSuccessInfo.setText(result);
             }
 
             @Override
@@ -182,7 +187,7 @@ public class MainActivity extends BaseActivity {
             //生成二维码图片的回调
             @Override
             public void onSuccess(Bitmap bitmap) {
-                iv_scanImg.setImageBitmap(bitmap);
+                mIBScan.setImageBitmap(bitmap);
                 ToastUtil.showShortToast(MainActivity.this, "Success");
             }
 
@@ -202,7 +207,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(Uri uri) {
                 File file = new File(URI.create(uri.toString()));
-                Glide.with(mMainActivity).load(file).skipMemoryCache(true).into(iv_scanImg);
+                Glide.with(mMainActivity).load(file).skipMemoryCache(true).into(mIBScan);
             }
 
             @Override
