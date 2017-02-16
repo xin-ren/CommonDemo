@@ -1,5 +1,12 @@
 *.iml
 .gradle
+/.idea
+app/*.iml
+app/build
+app/src/androidTest
+app/src/test
+/build
+/gradle
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
@@ -7,3 +14,5 @@
 /build
 /captures
 .externalNativeBuild
+/.idea/
+.idea
